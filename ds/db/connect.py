@@ -25,3 +25,6 @@ class Connection():
 
         return cls.__conn.cursor(pymysql.cursors.DictCursor)
 
+    @classmethod
+    def commit(cls):
+        cls.__conn.commit()

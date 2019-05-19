@@ -1,7 +1,7 @@
 import unittest
 import sys
-sys.path.insert(0,'../../db')
-import connect
+sys.path.insert(0,'../../../')
+from ds.db import connect
 
 class ConnectDBTest(unittest.TestCase):
 
