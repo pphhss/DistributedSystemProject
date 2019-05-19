@@ -1,7 +1,9 @@
 import socket
-import config
+import sys
 import threading
-
+sys.path.insert(0,'../../')
+from ds import config
+import json
 
 
 class Listen(threading.Thread):
@@ -23,7 +25,9 @@ class Listen(threading.Thread):
             conn, addr = self.socket.accept()
             msg = conn.recv(1024)
             print(f'{msg.decode()}')
-            conn.sendall(msg)
+            res = {}
+            res["result"] =1
+            conn.sendall(json.dumps(res).encode())
             conn.close()
             self.parent and self.parent.on_thread_finish()
 
