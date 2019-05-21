@@ -20,6 +20,11 @@ class NodeTest(unittest.TestCase):
         testNode = self.nl.getNode(0)
         self.assertEqual(testNode.getIp(),"111")
 
+    def test_getNodeByIp(self):
+        self.nl.clear()
+        self.nl.insertNode("111")
+        testNode = self.nl.getNodeByIp("111")
+        self.assertEqual(testNode.getIp(),"111")
 
 if __name__ == '__main__':
     unittest.main()

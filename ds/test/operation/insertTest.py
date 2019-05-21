@@ -14,6 +14,7 @@ class InsertLocalTest(unittest.TestCase):
         res = send.SendManager.sendOperationToNode(0,"insert","nicetomeetyou")
         print("test_sendMessageToNode response result : ",res["result"])
         self.assertEqual(res["result"],1)
+        self.assertIsNotNone(res["desip"])
 if __name__ == '__main__':
     unittest.main()
 
