@@ -1,7 +1,7 @@
 import unittest
 import sys
 sys.path.insert(0,'../../../')
-from ds.node import node
+from ds.node import node,data
 
 class NodeTest(unittest.TestCase):
 
@@ -23,6 +23,21 @@ class NodeTest(unittest.TestCase):
         self.node.setIp("192")
 
         self.assertEqual(self.node.getIp(),"192")
+
+    def test_setDatas(self):
+        data1 = data.Data()
+        data1.setIdx(1)
+        data1.setVersion(1)
+
+        data2 = data.Data()
+        data2.setIdx(2)
+        data2.setVersion(1)
+
+        self.node.addData(data1)
+        self.node.addData(data2)
+        
+        self.assertEqual(self.node.getData(1).getIdx(),1)
+        self.assertEqual(self.node.getData(2).getIdx(),2)
 
 if __name__ == '__main__':
     unittest.main()
