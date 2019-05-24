@@ -18,3 +18,6 @@ def primary(_sourceIp,_key,_value):
     res = db_data.insertData(_key,_value)
     return res
     
+def participate(_sourceIp):
+
+    for out_node in nodeList.NodeList.

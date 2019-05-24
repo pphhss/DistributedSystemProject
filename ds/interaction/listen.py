@@ -55,12 +55,16 @@ class Listen(threading.Thread):
             else:
                 return -1
         
-        if _message['opcode'] == 'primary':
+        elif _message['opcode'] == 'primary':
             res = operation.primary(_message['source'],_message['key'],_message['value'])
             if not (res is None):
                 return 1
             else:
                 return -1
+        
+        elif _message['opcode'] == 'participate':
+            pass
+
 
 
         return 0       

@@ -45,6 +45,16 @@ class SendManager():
         return res
 
     @classmethod
+    def sendParticipate(cls):
+        mes = {}
+        mes["opcode"] = "participate"
+        mes["source"] = config.ip
+
+        res = cls.send(0,mes)
+
+        return res
+
+    @classmethod
     def send(cls,_idx,_mes):
         targetNode = nodeList.NodeList.getNode(_idx)
         resp = None
