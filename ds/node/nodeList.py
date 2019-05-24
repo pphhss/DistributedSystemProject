@@ -1,8 +1,10 @@
-from . import node
+from . import node,data
+
 
 class NodeList():
-    __nodeList = []
+    __nodeList = [] # our group node's data except me
     __idxCount = 0
+    __me = [] # My Node 's data
 
     @classmethod
     def insertNode(cls,_ip):
@@ -19,6 +21,7 @@ class NodeList():
     def clear(cls):
         cls.__idxCount = 0
         cls.__nodeList.clear()
+        cls.__me.clear()
 
     @classmethod
     def getNode(cls,_idx):
@@ -38,6 +41,25 @@ class NodeList():
     @classmethod
     def getNodeList(cls):
         return cls.__nodeList
+
+    @classmethod
+    def getMe(cls):
+        return cls.__me
+
+    @classmethod
+    def insertMe(cls,_key,_version):
+        new_data = data.Data()
+        new_data.setKey(_key)
+        new_data.setVersion(_version)
+        cls.__me.append(new_data)
+
+    @classmethod
+    def isMe(cls,_key):
+        for me_data in cls.__me:
+            if me_data.getKey() == _key:
+                return True
+        return False
+
 
     @classmethod 
     def printNodes(cls):

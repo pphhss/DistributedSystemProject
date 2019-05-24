@@ -26,6 +26,18 @@ class NodeTest(unittest.TestCase):
         testNode = self.nl.getNodeByIp("111")
         self.assertEqual(testNode.getIp(),"111")
 
+    def test_getMe(self):
+        self.nl.clear()
+        me = self.nl.getMe()
+        self.assertIsNotNone(me)
+
+    def test_isMe(self):
+        self.nl.clear()
+        self.nl.insertMe("isMeTest",0)
+        res1=self.nl.isMe("isMeTest")
+        res2 = self.nl.isMe("isMeTest1")
+        self.assertEqual(res1,True)
+        self.assertEqual(res2,False)
 if __name__ == '__main__':
     unittest.main()
 
