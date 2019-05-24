@@ -1,9 +1,9 @@
 class Data:
-    def setIdx(self,_idx):
-        self.__idx=_idx
+    def setKey(self,_key):
+        self.__key=_key
 
-    def getIdx(self):
-        return self.__idx
+    def getKey(self):
+        return self.__key
 
     def setVersion(self,_version):
         self.__version = _version

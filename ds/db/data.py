@@ -11,10 +11,18 @@ def getData(_idx):
     res = cursor.fetchone()
     return res
 
-def insertData(_data):
-    insert = "INSERT INTO data(data) "
-    values = "VALUES(%s)"
-    cursor.execute(insert+values,(_data));
+def getDataFromKey(_key):
+    select = "SELECT * FROM data "
+    where = "WHERE k=%s"
+    cursor.execute(select+where,(_key))
+    res = cursor.fetchone()
+    return res
+
+
+def insertData(_key,_value):
+    insert = "INSERT INTO data(k,v) "
+    values = "VALUES(%s,%s)"
+    cursor.execute(insert+values,(_key,_value));
     connect.Connection.commit()
     res = cursor.lastrowid
     return res
@@ -27,6 +35,12 @@ def updateData(_idx,_data):
     res = cursor.lastrowid
     return res
 
-    
+def updateValue(_key,_value):
+    update = "UPDATE data SET v=%s"
+    where = "WHERE k=%s"
 
-    
+    cursor.execute(update+where,(_value,_key))
+    connect.Connection.commit()
+    res = cursor.lastrowid
+    return res
+

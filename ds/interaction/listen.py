@@ -49,12 +49,21 @@ class Listen(threading.Thread):
         if operation not exist, return 0;
         """
         if _message["opcode"] == "insert":
-            res = operation.insert(_message["message"])
+            res = operation.insert(_message["key"],_message["value"])
             if not (res is None):
                 return 1
             else:
                 return -1
-        return 0
+        
+        if _message['opcode'] == 'primary':
+            res = operation.primary(_message['source'],_message['key'],_message['value'])
+            if not (res is None):
+                return 1
+            else:
+                return -1
+
+
+        return 0       
 
 if __name__ == '__main__':
     listen = Listen()

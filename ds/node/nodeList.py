@@ -35,6 +35,10 @@ class NodeList():
                 return n
         return None
 
+    @classmethod
+    def getNodeList(cls):
+        return cls.__nodeList
+
     @classmethod 
     def printNodes(cls):
         print("--- printNodes START ---")

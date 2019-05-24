@@ -17,12 +17,31 @@ class SendManager():
         return res
 
     @classmethod
-    def sendOperationToNode(cls,_idx,_opcode,_msg):
+    def sendOperationToNode(cls,_idx,_opcode,_key,_value):
         mes={}
         mes["opcode"] = _opcode
-        mes["message"] = _msg
+        mes["key"]  = _key
+        mes["value"] = _value
         mes["source"] = config.ip
         res = cls.send(_idx,mes)
+        return res
+
+    @classmethod
+    def sendPrimaryToAllNode(cls,_key,_value):
+        mes = {}
+        mes["opcode"] = "primary"
+        mes["key"]  = _key
+        mes["value"] = _value
+        mes["source"] = config.ip
+        res = {}
+        res["success"] = 0
+        res["fail"] = 0
+        for node in nodeList.NodeList.getNodeList():
+            result = cls.send(node.getIdx(),mes)
+            if result['result'] == 1:
+                res['success'] +=1
+            else:
+                res['fail'] +=1
         return res
 
     @classmethod

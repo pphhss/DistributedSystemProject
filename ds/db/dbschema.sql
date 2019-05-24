@@ -10,6 +10,8 @@ CREATE DATABASE ds DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use ds;
 CREATE TABLE data(
 	idx int(1) not null AUTO_INCREMENT,
-	data varchar(20),
-	PRIMARY KEY(idx)
+	k varchar(20) not null,
+	v varchar(20),
+	PRIMARY KEY(idx),
+	UNIQUE(k)
 );

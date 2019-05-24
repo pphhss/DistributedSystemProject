@@ -13,16 +13,22 @@ class DataTest(unittest.TestCase):
         print(res)
         self.assertIsNotNone(res)
 
+    def test_getDataFromKey(self):
+        data.insertData('p1','hs')
+        res = data.getDataFromKey('p')
+        self.assertEqual(res['v'],'hs')
+
     def test_insertData(self):
-        res=data.insertData("hello")
+        res=data.insertData("q1",'hs')
         print(res)
         self.assertIsNotNone(res)
 
-    def test_updateData(self):
-        data.updateData(1,"halo")
-        res = data.getData(1)
+    def test_updateValue(self):
+        data.insertData('g1','hss')
+        data.updateValue('g',"halo")
+        res = data.getDataFromKey('g')
         print("test_updateDate : ",res)
-        self.assertEqual(res["data"],"halo")
+        self.assertEqual(res["v"],"halo")
 
 if __name__ == '__main__':
     unittest.main()

@@ -7,12 +7,12 @@ from ds.node import data
 class DataTest(unittest.TestCase):
     
 
-    def test_setIdx(self):
+    def test_setKey(self):
         dataTest = data.Data()
         idx = 1
-        dataTest.setIdx(idx)
+        dataTest.setKey(idx)
 
-        self.assertEqual(dataTest.getIdx(),idx)
+        self.assertEqual(dataTest.getKey(),idx)
 
     def test_setVersion(self):
         dataTest = data.Data()
