@@ -27,6 +27,8 @@ def participate(_sourceIp,_test):
     if not _test is None:
         _test["success"] = res["success"]
         _test["fail"] = res["fail"]
+    
+    nodeList.NodeList.insertNode(_sourceIp) # 새로운 노드 리스트에 추가
     return ips
 
 def addParticipant(_sourceIp):
