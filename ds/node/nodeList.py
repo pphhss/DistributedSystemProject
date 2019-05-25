@@ -25,7 +25,7 @@ class NodeList():
 
     @classmethod
     def getNode(cls,_idx):
-        cls.printNodes()
+        #cls.printNodes()
         for n in cls.__nodeList:
             if n.getIdx() == _idx:
                 return n

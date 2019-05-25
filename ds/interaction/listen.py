@@ -1,11 +1,11 @@
-from ds.operation import operation
-import json
-from ds import config
 import socket
 import sys
 import threading
-sys.path.insert(0, '../../')
+import json
 
+sys.path.insert(0, '../../')
+from ds.operation import operation
+from ds import config
 
 class Listen(threading.Thread):
     def __init__(self, parent=None):
@@ -21,6 +21,7 @@ class Listen(threading.Thread):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.bind((host, port))
         self.socket.listen(config.numNode)
+        print("Server Socket Listen")
         while self.isContinue:
             conn, addr = self.socket.accept()
             msg = conn.recv(1024)
@@ -66,8 +67,15 @@ class Listen(threading.Thread):
                 return -1
 
         elif _message['opcode'] == 'participate':
-            res = operation.participate(_message['source'])
+            res = operation.participate(_message['source'],None)
             return res
+
+        elif _message['opcode'] == 'addParticipant':
+            res = operation.addParticipant(_message['participant'])
+            if not (res is None):
+                return 1
+            else:
+                return -1
         return 0
 
     def checkParticipate(self, _result):

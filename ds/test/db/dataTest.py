@@ -10,7 +10,7 @@ class DataTest(unittest.TestCase):
 
     def test_getData(self):
         res=data.getData(1)
-        print(res)
+        #print(res)
         self.assertIsNotNone(res)
 
     def test_getDataFromKey(self):
@@ -20,14 +20,14 @@ class DataTest(unittest.TestCase):
 
     def test_insertData(self):
         res=data.insertData("q1",'hs')
-        print(res)
+        #print(res)
         self.assertIsNotNone(res)
 
     def test_updateValue(self):
         data.insertData('g1','hss')
         data.updateValue('g',"halo")
         res = data.getDataFromKey('g')
-        print("test_updateDate : ",res)
+        #print("test_updateDate : ",res)
         self.assertEqual(res["v"],"halo")
 
 if __name__ == '__main__':

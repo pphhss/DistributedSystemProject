@@ -12,5 +12,5 @@ def participate():
 
     for new_ip in new_ips:
         nodeList.NodeList.insertNode(new_ip)
-    
+    print("participating success")
     return 1

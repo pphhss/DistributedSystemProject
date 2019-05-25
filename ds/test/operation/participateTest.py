@@ -2,18 +2,19 @@ import unittest
 import sys
 sys.path.insert(0,'../../../')
 from ds.operation import operation
-from ds.interaction import send
-from ds.node import participate
-from ds import config
+from ds.node import nodeList
 
 class participateTest(unittest.TestCase):
     
     def setUp(self):
+        nodeList.NodeList.insertNode("localhost")
         pass
 
-    def test_sendParticipate(self):
-        res = participate.participate()
-        self.assertEqual(res,1)
+    def test_participate(self):
+        test = {}
+        operation.participate("localhost",test)
+        #print(test)
+        self.assertEqual(test["success"],1) 
 if __name__ == '__main__':
     unittest.main()
 

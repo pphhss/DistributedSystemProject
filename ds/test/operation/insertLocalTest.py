@@ -9,7 +9,7 @@ class InsertTest(unittest.TestCase):
         pass
     def test_insert(self):
         res = operation.insert("what","this is fucking day!")
-        print("response result : ",res)
+        #print("response result : ",res)
         self.assertIsNotNone(res)
 if __name__ == '__main__':
     unittest.main()

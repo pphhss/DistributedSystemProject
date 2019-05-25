@@ -14,7 +14,7 @@ class InsertLocalTest(unittest.TestCase):
 
     def test_sendMessageToNode(self):
         res = send.SendManager.sendOperationToNode(0,"insert","test","nicetomeetyou")
-        print("test_sendMessageToNode response result : ",res["result"])
+        #print("test_sendMessageToNode response result : ",res["result"])
         self.assertEqual(res["result"],1)
         self.assertIsNotNone(res["source"],self.ip)
 if __name__ == '__main__':

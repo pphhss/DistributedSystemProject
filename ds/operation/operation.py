@@ -19,11 +19,17 @@ def primary(_sourceIp,_key,_value):
     res = db_data.insertData(_key,_value)
     return res
     
-def participate(_sourceIp):
+def participate(_sourceIp,_test):
     ips = []
     for our_node in nodeList.NodeList.getNodeList():
         ips.append(our_node.getIp())
-    
+    res = send.SendManager.sendAddParticipant(_sourceIp)
+    if not _test is None:
+        _test["success"] = res["success"]
+        _test["fail"] = res["fail"]
     return ips
-    
+
+def addParticipant(_sourceIp):
+    nodeList.NodeList.insertNode(_sourceIp)
+    return 1
         
