@@ -13,7 +13,7 @@ class SendManager():
     def sendMessageToNode(cls,_idx,_message):
         mes = {}
         mes["message"]=_message
-        res = send(_idx,mes)
+        res = cls.send(_idx,mes)
         return res
 
     @classmethod
