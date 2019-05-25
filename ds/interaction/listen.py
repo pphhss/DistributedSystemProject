@@ -67,6 +67,7 @@ class Listen(threading.Thread):
                 return -1
 
         elif _message['opcode'] == 'participate':
+            print(_message['source']," wants to participate")
             res = operation.participate(_message['source'],None)
             return res
 
