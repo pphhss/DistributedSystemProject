@@ -26,18 +26,18 @@ class NodeTest(unittest.TestCase):
 
     def test_setDatas(self):
         data1 = data.Data()
-        data1.setIdx(1)
+        data1.setKey(1)
         data1.setVersion(1)
 
         data2 = data.Data()
-        data2.setIdx(2)
+        data2.setKey(2)
         data2.setVersion(1)
 
         self.node.addData(data1)
         self.node.addData(data2)
         
-        self.assertEqual(self.node.getData(1).getIdx(),1)
-        self.assertEqual(self.node.getData(2).getIdx(),2)
+        self.assertEqual(self.node.getData(1).getKey(),1)
+        self.assertEqual(self.node.getData(2).getKey(),2)
 
 if __name__ == '__main__':
     unittest.main()

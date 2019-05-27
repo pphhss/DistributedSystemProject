@@ -6,6 +6,7 @@ from ds import ip
 ip = ip.ip
 listenPort = 8888
 numNode = 4
+listenOutPort = 8887
 
 db={
     'host' : 'localhost',

@@ -1,10 +1,9 @@
-from ds import config
-from ds.node import nodeList
 import socket
 import json
 import sys
 sys.path.insert(0, '../../')
-
+from ds import config
+from ds.node import nodeList
 
 class SendManager():
     __socket = None
@@ -88,6 +87,13 @@ class SendManager():
     def getSocket():
         return socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+    @classmethod
+    def sendExternal(cls,_sourceIp,_mes):
+        with cls.getSocket() as s:
+            s.connect((_sourceIp, config.listenOutPort))
+            s.sendall(json.dumps(_mes).encode())
+            resp = s.recv(1024)
+        return json.loads(resp.decode())
 
 '''
 def send(message):

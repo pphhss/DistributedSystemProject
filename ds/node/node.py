@@ -22,9 +22,9 @@ class Node():
     def addData(self,_data):
         self.__dataList.append(_data)
 
-    def getData(self,_idx):
+    def getData(self,_key):
         
         for data in self.__dataList:
-            if data.getIdx() == _idx:
+            if data.getKey() == _key:
                 return data
         return None
