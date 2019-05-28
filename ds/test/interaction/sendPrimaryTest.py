@@ -14,7 +14,7 @@ class OperationTest(unittest.TestCase):
         nodeList.NodeList.insertNode(self.ip)
 
     def test_sendPrimaryToNode(self):
-        res = send.SendManager.sendPrimaryToAllNode("primaryTest5","nicetomeetyoau")
+        res = send.SendManager.sendPrimaryToAllNode("primaryTest6","nicetomeetyoau")
         print("test_sendMessageToNode response result : ",res)
         self.assertEqual(res["success"],1)
         self.assertIsNotNone(res["fail"],0)

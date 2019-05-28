@@ -4,7 +4,7 @@ import threading
 import json
 
 sys.path.insert(0, '../../')
-from ds.operation import operation
+from ds.operation import operation,remoteWrite
 from ds import config
 
 class Listen(threading.Thread):
@@ -60,7 +60,7 @@ class Listen(threading.Thread):
                 return -1
 
         elif _message['opcode'] == 'primary':
-            res = operation.primary(_message['source'], _message['key'], _message['value'],True)
+            res = remoteWrite.primary(_message['source'], _message['key'], _message['value'],True)
             if not (res is None):
                 return 1
             else:
