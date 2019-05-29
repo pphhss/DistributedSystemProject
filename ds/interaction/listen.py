@@ -24,25 +24,36 @@ class Listen(threading.Thread):
         print("Server Socket Listen")
         while self.isContinue:
             conn, addr = self.socket.accept()
-            msg = conn.recv(1024)
-            print("IN : ",f'{msg.decode()}')
-            message = json.loads(msg.decode())
-            result = self.operationMessage(message)
-            res = {}
-            if self.checkParticipate(result):
-                res["data"] = result
-                res["result"] = 1
-            else:
-                res["result"] = result
-            res["source"] = config.ip
-            print("OUT : ",res);
-            conn.sendall(json.dumps(res).encode())
-            conn.close()
+            communication = Communication(conn)
+            communication.start()
             self.parent and self.parent.on_thread_finish()
 
     def stop(self):
         self.isContinue = False
         self.socket.close()
+
+
+
+class Communication(threading.Thread):
+    def __init__(self,_conn):
+        super(Communication, self).__init__()
+        self.conn=_conn
+
+    def run(self):
+        msg = self.conn.recv(1024)
+        print("IN : ",f'{msg.decode()}')
+        message = json.loads(msg.decode())
+        result = self.operationMessage(message)
+        res = {}
+        if self.checkParticipate(result):
+            res["data"] = result
+            res["result"] = 1
+        else:
+            res["result"] = result
+        res["source"] = config.ip
+        print("OUT : ",res)
+        self.conn.sendall(json.dumps(res).encode())
+        self.conn.close()
 
     def operationMessage(self, _message):
         """
@@ -60,7 +71,7 @@ class Listen(threading.Thread):
                 return -1
 
         elif _message['opcode'] == 'primary':
-            res = remoteWrite.primary(_message['source'], _message['key'], _message['value'],True)
+            res = remoteWrite.primary(_message['source'], _message['key'], _message['value'])
             if not (res is None):
                 return 1
             else:
@@ -84,6 +95,7 @@ class Listen(threading.Thread):
             return True
         else:
             return False
+
 
 
 if __name__ == '__main__':
