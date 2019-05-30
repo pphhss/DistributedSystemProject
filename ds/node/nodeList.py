@@ -60,6 +60,20 @@ class NodeList():
                 return True
         return False
 
+    @classmethod
+    def insertDataInNode(cls,_sourceIp,_key):
+        node = cls.getNodeByIp(_sourceIp)
+        new_data = data.Data()
+        new_data.setKey(_key)
+        new_data.setVersion(0)
+        node.addData(new_data)
+        
+    @classmethod
+    def findPrimary(cls,_key):
+        for n in cls.__nodeList:
+            if not (n.getData(_key) is None):
+                return n
+        return None
 
     @classmethod 
     def printNodes(cls):

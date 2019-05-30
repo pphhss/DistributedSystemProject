@@ -88,6 +88,21 @@ class Communication(threading.Thread):
                 return 1
             else:
                 return -1
+        
+        elif _message['opcode'] == 'update':
+            res = remoteWrite.update(_message['key'],_message['value'])
+            if not (res is None):
+                return 1
+            else:
+                return -1
+        
+        elif _message['opcode'] == 'primaryUpdate':
+            res = remoteWrite.primaryUpdate(_message['key'],_message['value'])
+            if not (res is None):
+                return 1
+            else:
+                return -1
+        
         return 0
 
     def checkParticipate(self, _result):
