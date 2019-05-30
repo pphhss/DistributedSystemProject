@@ -33,7 +33,7 @@ class Listen(threading.Thread):
 
             res["result"] = result
             res["source"] = config.ip
-            print("OUT : ",res);
+            print("OUT : ",res)
             conn.sendall(json.dumps(res).encode())
             conn.close()
             self.parent and self.parent.on_thread_finish()
@@ -60,7 +60,8 @@ class Listen(threading.Thread):
         elif _message['opcode'] == 'select':
             pass
         elif _message['opcode'] == 'update':
-            pass
+            exop.update(_message["key"], _message["value"])
+
         return 0
 
     def checkParticipate(self, _result):
