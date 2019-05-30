@@ -61,7 +61,11 @@ class Listen(threading.Thread):
             pass
         elif _message['opcode'] == 'update':
             exop.update(_message["key"], _message["value"])
+            return 1
 
+        elif _message['opcode'] == 'read':
+            exop.read(_message["key"])
+            return 1
         return 0
 
     def checkParticipate(self, _result):

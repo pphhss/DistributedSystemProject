@@ -10,14 +10,14 @@ from ds import config
 class SendExternalInsertTest(unittest.TestCase):
     
     def setUp(self):
-        self.ip=config.ip
+        self.ip="54.180.97.134"
         nodeList.NodeList.insertNode(self.ip)
 
     def test_SendExternalInsertTest(self):
         mes = {}
         mes["opcode"] = "insert"
-        mes["key"] = "eiTEST2"
-        mes["value"] = "aa"
+        mes["key"] = "eiTEST8"
+        mes["value"] = "do that?"
         res = send.SendManager.sendExternal(self.ip,mes)
         print("test_sendMessageToNode response result : ",res)
         self.assertEqual(res["result"],1)

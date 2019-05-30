@@ -21,5 +21,8 @@ def update(_key,_value):
     else:
         res = send.SendManager.sendUpdateToPrimary(_key,_value)
     return res
-    
+
+def read(_key):
+    result = data.getDataFromKey(_key)
+    return result["v"]
 
