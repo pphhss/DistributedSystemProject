@@ -36,4 +36,5 @@ def primaryNewUpdate(_key,_value):
     version = nodeList.NodeList.getVersionInOtherNode(_key)
     version +=1
     res = send.SendManager.sendNewUpdateToAllNodeLocalWrite(_key,_value,version)
+    update(_key,_value,version)
 
