@@ -4,6 +4,11 @@ from ds.db import connect
 
 cursor = connect.Connection.getCursor()
 
+def deleteAllData():
+    delete = "DELETE FROM data"
+    cursor.execute(delete)
+    connect.Connection.commit()
+
 def getData(_idx):
     select  = "SELECT * FROM data "
     where = "WHERE idx=%s"
