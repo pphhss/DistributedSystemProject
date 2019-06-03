@@ -61,11 +61,39 @@ class NodeList():
         return False
 
     @classmethod
-    def insertDataInNode(cls,_sourceIp,_key):
+    def getVersionInOtherNode(cls,_key):
+        for n in cls.__nodeList:
+            if not (n.getData(_key) is None):
+                return n.getData(_key).getVersion()
+            
+    @classmethod
+    def getVersionInMe(cls,_key):
+        for me_data in cls.__me:
+            if me_data.getKey() == _key:
+                return me_data.getVersion()
+        return None
+
+    @classmethod
+    def updateVersion(cls,_key,_version):
+        for me_data in cls.__me:
+            if me_data.getKey() == _key:
+                me_data.setVersion(_version)
+
+    @classmethod
+    def updateNewPrimary(cls,_key,_version,_sourceIp):
+        for n in cls.__nodeList:
+            if not (n.getData(_key) is None):
+                n.deleteData(_key)
+        cls.insertDataInNode(_sourceIp,_key,_version)
+
+
+    
+    @classmethod
+    def insertDataInNode(cls,_sourceIp,_key,_version=0):
         node = cls.getNodeByIp(_sourceIp)
         new_data = data.Data()
         new_data.setKey(_key)
-        new_data.setVersion(0)
+        new_data.setVersion(_version)
         node.addData(new_data)
         
     @classmethod

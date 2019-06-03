@@ -8,6 +8,11 @@ listenPort = 8888
 numNode = 4
 listenOutPort = 8887
 
+REMOTEWRITE=0
+LOCALWRITE=1
+
+mode = LOCALWRITE
+
 db={
     'host' : 'localhost',
     'user' : 'root',

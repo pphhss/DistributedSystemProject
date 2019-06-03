@@ -28,3 +28,11 @@ class Node():
             if data.getKey() == _key:
                 return data
         return None
+
+    def deleteData(self,_key):
+        for idx in range(len(self.__dataList)):
+            data = self.__dataList[idx]
+            if data.getKey() == _key:
+                del self.__dataList[idx]
+                return
+        

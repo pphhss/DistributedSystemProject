@@ -4,7 +4,7 @@ import threading
 import json
 
 sys.path.insert(0, '../../')
-from ds.operation import operation,remoteWrite
+from ds.operation import operation,remoteWrite,localWrite
 from ds import config
 
 class Listen(threading.Thread):
@@ -102,7 +102,21 @@ class Communication(threading.Thread):
                 return 1
             else:
                 return -1
+
+        elif _message['opcode'] == 'updateLocalWrite':
+            res = localWrite.update(_message['key'],_message['value'],_message['version'])
+            if not (res is None):
+                return 1
+            else:
+                return -1
         
+        elif _message['opcode'] == 'NewUpdateLocalWrite':
+            res = localWrite.updatePrimary(_message['key'],_message['value'],_message['version'],_message['source'])
+            if not (res is None):
+                return 1
+            else:
+                return -1
+
         return 0
 
     def checkParticipate(self, _result):

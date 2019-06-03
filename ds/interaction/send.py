@@ -35,6 +35,49 @@ class SendManager():
                 res['fail'] += 1
         return res
         
+
+    @classmethod
+    def sendNewUpdateToAllNodeLocalWrite(cls,_key,_value,_version): #프라이머리 이동
+        mes = {}
+        mes["opcode"] = "NewUpdateLocalWrite"
+        mes["key"] = _key
+        mes["value"] = _value
+        mes["version"] = _version
+        mes["source"] = config.ip
+
+        res = {}
+        res["success"] = 0
+        res["fail"] = 0
+        
+        for node in nodeList.NodeList.getNodeList():
+            result = cls.send(node.getIdx(), mes)
+            if result['result'] == 1:
+                res['success'] += 1
+            else:
+                res['fail'] += 1
+        return res
+
+    @classmethod
+    def sendUpdateToAllNodeLocalWrite(cls,_key,_value,_version):
+        mes = {}
+        mes["opcode"] = "updateLocalWrite"
+        mes["key"] = _key
+        mes["value"] = _value
+        mes["version"] = _version
+        mes["source"] = config.ip
+
+        res = {}
+        res["success"] = 0
+        res["fail"] = 0
+        
+        for node in nodeList.NodeList.getNodeList():
+            result = cls.send(node.getIdx(), mes)
+            if result['result'] == 1:
+                res['success'] += 1
+            else:
+                res['fail'] += 1
+        return res
+
     @classmethod
     def sendOperationToNode(cls, _idx, _opcode, _key, _value):
         mes = {}

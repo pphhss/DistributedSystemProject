@@ -38,6 +38,40 @@ class NodeTest(unittest.TestCase):
         res2 = self.nl.isMe("isMeTest1")
         self.assertEqual(res1,True)
         self.assertEqual(res2,False)
+
+    def test_getVersion(self):
+        key = "getVersionTest"
+        self.nl.clear()
+        self.nl.insertMe(key,0)
+        self.assertEqual(self.nl.getVersionInMe(key),0)
+
+    def test_updateVersion(self):
+        key = "getVersionTest"
+        self.nl.clear()
+        self.nl.insertMe(key,0)
+        self.nl.updateVersion(key,1)
+        self.assertEqual(self.nl.getVersionInMe(key),1)
+
+    def test_getVersionInOther(self):
+        self.nl.clear()
+        self.nl.insertNode("ff")
+        self.nl.insertDataInNode("ff","key")
+        self.assertEqual(self.nl.getVersionInOtherNode("key"),0)
+
+    def test_updateNewPrimary(self):
+        key="key"
+        n1 = "n1"
+        n2 = "n2"
+        
+        self.nl.clear()
+        self.nl.insertNode(n1)
+        self.nl.insertNode(n2)
+        self.nl.insertDataInNode(n1,key)
+        self.nl.updateNewPrimary(key,1,n2)
+
+        self.assertEqual(self.nl.getVersionInOtherNode(key),1)
+
+
 if __name__ == '__main__':
     unittest.main()
 
