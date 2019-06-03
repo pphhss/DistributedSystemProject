@@ -28,13 +28,13 @@ def updatePrimary(_key,_value,_version,_sourceIp):
 def primaryUpdate(_key,_value):
     version = nodeList.NodeList.getVersionInMe(_key)
     version += 1
-    res = send.SendManager.sendUpdateToAllNodeLocalWrite(_key,_value,version)
     update(_key,_value,version)
+    res = send.SendManager.sendUpdateToAllNodeLocalWrite(_key,_value,version)
     return res
 
 def primaryNewUpdate(_key,_value):
     version = nodeList.NodeList.getVersionInOtherNode(_key)
     version +=1
-    res = send.SendManager.sendNewUpdateToAllNodeLocalWrite(_key,_value,version)
     update(_key,_value,version)
+    res = send.SendManager.sendNewUpdateToAllNodeLocalWrite(_key,_value,version)
 
