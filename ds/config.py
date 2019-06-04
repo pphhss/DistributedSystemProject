@@ -10,6 +10,7 @@ listenOutPort = 8887
 
 REMOTEWRITE=0
 LOCALWRITE=1
+BASIC =2
 
 mode = LOCALWRITE
 

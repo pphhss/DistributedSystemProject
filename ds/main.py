@@ -11,10 +11,9 @@ def main():
     print("Server Start")
     listen.Listen().start()
 
-    if config.mode == config.REMOTEWRITE:
-        externalListen.Listen().start()
-    else:
-        externalListenLocalWrite.Listen().start()
+
+    externalListen.Listen().start()
+
     
     if ip.isNotLeader():
         participate.participate()

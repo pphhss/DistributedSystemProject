@@ -10,13 +10,13 @@ from ds import config
 class SendExternalInsertTest(unittest.TestCase):
     
     def setUp(self):
-        self.ip="13.125.31.140"
+        self.ip="15.164.166.41"
         nodeList.NodeList.insertNode(self.ip)
 
     def test_SendExternalInsertTest(self):
         mes = {}
         mes["opcode"] = "update"
-        mes["key"] = "localWriteTest2"
+        mes["key"] = "localWriteTest1"
         mes["value"] = "localUpdateTest"
         res = send.SendManager.sendExternal(self.ip,mes)
         print("test_sendMessageToNode response result : ",res)
