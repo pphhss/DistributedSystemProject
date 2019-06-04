@@ -25,14 +25,12 @@ class Listen(threading.Thread):
         while self.isContinue:
             conn, addr = self.socket.accept()
             msg = conn.recv(1024)
-            print("IN : ",f'{msg.decode()}')
             message = json.loads(msg.decode())
             
             if message['opcode'] == 'read':
                 res = {}
                 res["result"] = self.operationMessage(message, res)
                 res["source"] = config.ip
-                print("OUT : ",res)
                 conn.sendall(json.dumps(res).encode())
                 conn.close()
                 
@@ -40,7 +38,6 @@ class Listen(threading.Thread):
                 res = {}
                 res["result"] = 1
                 res["source"] = config.ip
-                print("OUT : ",res)
                 conn.sendall(json.dumps(res).encode())
                 conn.close()
                 self.operationMessage(message, res)

@@ -41,7 +41,6 @@ class Communication(threading.Thread):
 
     def run(self):
         msg = self.conn.recv(1024)
-        print("IN : ",f'{msg.decode()}')
         message = json.loads(msg.decode())
         result = self.operationMessage(message)
         res = {}
@@ -51,7 +50,6 @@ class Communication(threading.Thread):
         else:
             res["result"] = result
         res["source"] = config.ip
-        print("OUT : ",res)
         self.conn.sendall(json.dumps(res).encode())
         self.conn.close()
 

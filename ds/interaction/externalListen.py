@@ -25,7 +25,6 @@ class Listen(threading.Thread):
         while self.isContinue:
             conn, addr = self.socket.accept()
             msg = conn.recv(1024)
-            print("IN : ",f'{msg.decode()}')
             message = json.loads(msg.decode())
 
             res = {}
@@ -33,7 +32,6 @@ class Listen(threading.Thread):
 
             res["result"] = result
             res["source"] = config.ip
-            print("OUT : ",res)
             conn.sendall(json.dumps(res).encode())
             conn.close()
             self.parent and self.parent.on_thread_finish()
