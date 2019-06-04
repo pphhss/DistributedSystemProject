@@ -13,8 +13,11 @@ def insert(_key,_value):
         res = send.SendManager.sendPrimaryToAllNode(_key,_value)
         return res
     elif config.mode == config.BASIC:
-        res = data.insertData(_key,_value)
-        return 1
+        data.insertData(_key,_value)
+        res = {}
+        res["fail"] = 0
+        return res
+        
 def update(_key,_value):
     res = {}
     res["success"] = 0
