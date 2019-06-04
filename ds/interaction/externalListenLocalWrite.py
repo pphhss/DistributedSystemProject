@@ -27,15 +27,23 @@ class Listen(threading.Thread):
             msg = conn.recv(1024)
             print("IN : ",f'{msg.decode()}')
             message = json.loads(msg.decode())
-
-            res = {}
-            res["result"] = 1
-            res["source"] = config.ip
-            print("OUT : ",res)
-            conn.sendall(json.dumps(res).encode())
-            conn.close()
             
-            self.operationMessage(message, res)
+            if message['opcode'] == 'read':
+                res = {}
+                res["result"] = self.operationMessage(message, res)
+                res["source"] = config.ip
+                print("OUT : ",res)
+                conn.sendall(json.dumps(res).encode())
+                conn.close()
+                
+            else:
+                res = {}
+                res["result"] = 1
+                res["source"] = config.ip
+                print("OUT : ",res)
+                conn.sendall(json.dumps(res).encode())
+                conn.close()
+                self.operationMessage(message, res)
 
             self.parent and self.parent.on_thread_finish()
 
